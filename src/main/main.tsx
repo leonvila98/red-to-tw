@@ -1,6 +1,5 @@
 import { TextField, Button } from '@mui/material';
-import { makeStyles } from '@mui/material/styles';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { TwitterAPIService } from '../services/twitterClient';
 
 interface Props {}
@@ -26,7 +25,6 @@ interface Post {
 const Main: React.FC<Props> = (props) => {
     const [text, setText] = useState('');
     const snoowrap = require('snoowrap');
-    const Twitter = require('twitter');
     const rwClient = new TwitterAPIService(
         process.env.REACT_APP_TW_API_KEY ?? '',
         process.env.REACT_APP_TW_API_KEY_SECRET ?? '',
