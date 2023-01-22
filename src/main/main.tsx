@@ -1,4 +1,5 @@
 import { TextField, Button } from '@mui/material';
+import axios from 'axios';
 import React, { useState } from 'react';
 import { TwitterAPIService } from '../services/twitterClient';
 
@@ -37,6 +38,26 @@ const Main: React.FC<Props> = (props) => {
             await rwClient.post('hola mundo');
         } catch (error) {}
     };
+    const headers = {
+        Authorization: `Bearer ${process.env.REACT_APP_TW_BEARER_TOKEN}`,
+    };
+
+    const texttotw = 'Hello world';
+
+    const data = {
+        status: texttotw,
+    };
+    const url = 'https://api.twitter.com/1.1/statuses/update.json';
+    const proxy = 'https://cors-anywhere.herokuapp.com/';
+    const tw = () =>
+        axios
+            .post(proxy + url, data, { headers })
+            .then((response) => {
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
 
     // const r = new snoowrap({
     //     userAgent: process.env.REACT_APP_RED_USER_AGENT,
@@ -63,7 +84,8 @@ const Main: React.FC<Props> = (props) => {
 
     const handleClick = () => {
         // get();
-        tweet();
+        // tweet();
+        tw();
         // console.log('|r', r);
     };
 
